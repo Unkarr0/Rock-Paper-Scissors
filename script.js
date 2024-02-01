@@ -2,6 +2,10 @@
 function game()
 {
 
+
+
+  const objects = Array('paper', 'rock', 'scissors');
+
     function getComputerChoice(objects)
     {
         
@@ -11,45 +15,84 @@ function game()
         
     } 
 
-for (let i=0;i<5;i++)
-{
-    const objects = Array('paper', 'rock', 'scissors');
-    const computerSelection = getComputerChoice(objects);
-    console.log(computerSelection);
-    const playerSelection = prompt("Paper, rock or scissors?").trim().toLowerCase();
-    console.log(playerSelection);
-
-    if(playerSelection === "")
-    {
-        console.log("No input buddy");
-    }
-    else
-    {
-        result = playRound(playerSelection, computerSelection);
-        console.log(result);
-    }
-}
+    let points = 0;
 
 
-function playRound(playerSelection, computerSelection) {
 
-
-    if(playerSelection === computerSelection)
-    {
-        return "Draw! " + playerSelection + " loves " + computerSelection;
-    }
-    if((playerSelection === "rock" && computerSelection === "paper")||(playerSelection === "paper" && computerSelection === "scissors")||(playerSelection === "scissors" && computerSelection === "rock"))
-    {
-        return "You lose! " + computerSelection + " beats " + playerSelection;
-    }
-    else 
-    {
-        return "You win! " + playerSelection + " beats " + computerSelection;
-    }
-        
-  }
-  }
+      const computerSelection = getComputerChoice(objects);
+      console.log(computerSelection);
   
-game();
+  
+ 
+
+    let rock = document.querySelector("#rock");
+    let paper = document.querySelector("#paper");
+    let scissors = document.querySelector("#scissors");
+
+    const p = document.createElement("p");
+    const score = document.createElement("p");
+    const display = document.querySelector("#display");
+
+   
+
+
+    function playRound(playerSelection, computerSelection) {
+
+     
+        if(playerSelection === computerSelection)
+        {
+            p.innerText = "Draw! " + playerSelection + " loves " + computerSelection;
+
+            document.body.style.backgroundColor = "#fffd91";
+
+            display.appendChild(p);
+
+        }
+        if((playerSelection === "rock" && computerSelection === "paper")||(playerSelection === "paper" && computerSelection === "scissors")||(playerSelection === "scissors" && computerSelection === "rock"))
+        {
+            p.innerText = "You lose! " + computerSelection + " beats " + playerSelection;
+            document.body.style.backgroundColor = "#cc6056";
+            display.appendChild(p);
+        }
+        else if((playerSelection === "paper" && computerSelection === "rock")||(playerSelection === "scissors" && computerSelection === "paper")||(playerSelection === "rock" && computerSelection === "scissors"))
+        {
+            p.innerText = "You win! " + playerSelection + " beats " + computerSelection;
+            document.body.style.backgroundColor = "#8bc981"
+            ;
+            display.appendChild(p);
+        }
+    
+      }
+
+
+
+
+      rock.addEventListener('click', function()
+      {
+        playRound("rock", computerSelection)
+      }
+      )
+      paper.addEventListener('click', function()
+      {
+        playRound("paper", computerSelection)
+      }
+      )
+      scissors.addEventListener('click', function()
+      {
+        playRound("scissors", computerSelection)
+      }
+      )
+
+   
+
+
+    
+
+
+
+  }
+    
+
+game()
 
 //I did this project
